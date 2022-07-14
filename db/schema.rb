@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_14_191903) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_14_234008) do
   create_table "comments", force: :cascade do |t|
     t.string "body"
     t.datetime "created_at", null: false
@@ -29,6 +29,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_14_191903) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.boolean "upvote"
+    t.integer "voter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
