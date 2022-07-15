@@ -3,4 +3,5 @@ class Post < ApplicationRecord
   validates :caption, length: { maximum: 140 }
   belongs_to :user
   has_many :comments
+  has_many :votes
 end
