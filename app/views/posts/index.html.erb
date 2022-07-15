@@ -2,4 +2,8 @@
   User: <%= post.user.username %><br>
   Link: <%= post.link %><br>
   Caption: <%= post.caption %><br><br>
+  <%= button_to 'Upvote this post',
+    vote_posts_path(vote: { post_id: post.id, upvote: true } ) %>
+  <%= button_to 'Downvote this post',
+    vote_posts_path(vote: { post_id: post.id, upvote: false } ) %>
 <% end %>
