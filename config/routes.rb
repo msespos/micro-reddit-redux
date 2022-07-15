@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     collection do
-      get 'vote'
+      post 'vote'
     end
   end
 end
