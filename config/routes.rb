@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:index, :new, :create] do
     collection do
       post 'vote'
+      post 'comment'
     end
   end
 end
