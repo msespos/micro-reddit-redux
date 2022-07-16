@@ -1,11 +1,17 @@
 <% @posts.each do |post| %>
   User: <%= post.user.username %><br>
-  Link: <%= post.link %><br>
+  Link: <%= link_to "#{post.link}", "#{post.link}" %><br>
   Caption: <%= post.caption %><br><br>
-  <%= button_to 'Upvote this post',
-    vote_posts_path(vote: { post_id: post.id, upvote: true } ) %>
-  <%= button_to 'Downvote this post',
-    vote_posts_path(vote: { post_id: post.id, upvote: false } ) %>
+  <% if current_user %>
+    <%= button_to 'Upvote this post',
+      vote_posts_path(vote: { post_id: post.id, upvote: true } ) %>
+    <%= button_to 'Downvote this post',
+      vote_posts_path(vote: { post_id: post.id, upvote: false } ) %>
+  <% end %>
 <% end %>
-<%= button_to "New post", new_post_path, method: :get %>
-<%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<% if current_user %>
+  <%= button_to "New post", new_post_path, method: :get %>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= button_to "Sign in", new_user_session_path, method: :get %>
+<% end %>
