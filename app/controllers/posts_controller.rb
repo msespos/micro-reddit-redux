@@ -22,7 +22,10 @@ class PostsController < ApplicationController
   def vote
     @vote = Vote.new(vote_params)
     @vote.user_id = current_user.id
-    if @vote.save
+    if Post.already_voted(current_user, vote_params[:post_id])
+      flash[:alert] = "You can't vote more than once for a post!"
+      redirect_to posts_path
+    elsif @vote.save
       flash[:notice] = 'You voted on a post!'
       redirect_to posts_path
     else
