@@ -7,3 +7,4 @@
   <%= button_to 'Downvote this post',
     vote_posts_path(vote: { post_id: post.id, upvote: false } ) %>
 <% end %>
+<%= button_to "Sign out", destroy_user_session_path, method: :delete %>
