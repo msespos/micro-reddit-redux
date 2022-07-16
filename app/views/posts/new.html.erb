@@ -1,0 +1,7 @@
+<%= form_with model: @post do |f| %>
+  <%= f.label :link %>
+  <%= f.text_field :link %>
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+  <%= f.submit "Submit" %>
+<% end %>
