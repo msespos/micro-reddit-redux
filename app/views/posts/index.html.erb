@@ -1,21 +1,24 @@
 <% @posts.each do |p| %>
   User: <%= p.user.username %><br>
   Link: <%= link_to "#{p.link}", "#{p.link}" %><br>
-  Caption: <%= p.caption %><br><br>
+  Caption: <%= p.caption %><br>
+  Upvotes: <%= p.votes.where(upvote: true).count %><br>
+  Downvotes: <%= p.votes.where(upvote: false).count %><br>
   <% if current_user %>
     <%= button_to 'Upvote this post',
       vote_posts_path(vote: { post_id: p.id, upvote: true } ) %>
     <%= button_to 'Downvote this post',
       vote_posts_path(vote: { post_id: p.id, upvote: false } ) %>
   <% end %>
+  Comments:<br>
   <% p.comments.each do |c| %>
     <%= c.body %>
     -<%= c.user.username %><br>
   <% end %>
-  <%= form_with model: @comment, url: comment_posts_path do |f| %>
+  <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
     <%= f.hidden_field :post_id, value: p.id %>
     <%= f.text_area :body %>
-    <%= f.submit "Post a comment" %>
+    <%= f.submit "Post a comment" %><br><br>
   <% end %>
 <% end %>
 <% if current_user %>
