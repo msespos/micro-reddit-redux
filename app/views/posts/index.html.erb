@@ -1,5 +1,8 @@
+<% if current_user %>
+  Signed in as <%= current_user.username %><br><br>
+<% end %>
 <% @posts.each do |p| %>
-  User: <%= p.user.username %><br>
+  Poster: <%= p.user.username %><br>
   Link: <%= link_to "#{p.link}", "#{p.link}" %><br>
   Caption: <%= p.caption %><br>
   Upvotes: <%= p.votes.where(upvote: true).count %><br>
