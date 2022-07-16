@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root to: 'devise/sessions#new'
   end
 
-  resources :posts, only: :index do
+  resources :posts, only: [:index, :new, :create] do
     collection do
       post 'vote'
     end
