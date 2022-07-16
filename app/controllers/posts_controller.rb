@@ -31,6 +31,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def comment
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
+    if @comment.save
+      flash[:notice] = 'You commented on a post!'
+      redirect_to posts_path
+    else
+      flash[:alert] = 'Error - could not process comment'
+      render 'new'
+    end
+  end
+
   private
 
     def post_params
@@ -39,5 +51,9 @@ class PostsController < ApplicationController
 
     def vote_params
       params.require(:vote).permit(:upvote, :user_id, :post_id,)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:body, :user_id, :post_id)
     end
 end
