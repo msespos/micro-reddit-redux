@@ -3,6 +3,22 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    if @post.save
+      flash[:notice] = 'Post created!'
+      redirect_to posts_path
+    else
+      flash[:alert] = 'Error - could not process post creation'
+      render 'new'
+    end
+  end
+
   def vote
     @vote = Vote.new(vote_params)
     @vote.user_id = current_user.id
@@ -16,6 +32,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+    def post_params
+      params.require(:post).permit(:link, :caption)
+    end
 
     def vote_params
       params.require(:vote).permit(:upvote, :user_id, :post_id,)
