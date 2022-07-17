@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    if params[:sort] == 'hot'
+      @posts = Post.posts_by_hotness
+    elsif params[:sort] == 'new'
+      @posts = Post.all.reverse
+    else
+      @posts = Post.posts_by_score
+    end
   end
 
   def new

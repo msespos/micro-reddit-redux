@@ -1,6 +1,9 @@
 <% if current_user %>
   Signed in as <%= current_user.username %><br><br>
 <% end %>
+<%= link_to "Hot", sort: :hot %>
+<%= link_to "New", sort: :new %>
+<%= link_to "Best", sort: :best %><br><br>
 <% @posts.each do |p| %>
   Poster: <%= p.user.username %><br>
   Link: <%= link_to "#{p.link}", "#{p.link}" %><br>
